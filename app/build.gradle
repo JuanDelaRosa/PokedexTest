@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.finanzas"
+        applicationId "com.example.Pokedex"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
@@ -54,4 +54,7 @@ dependencies {
 
     //Picaso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 }

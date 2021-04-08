@@ -1,4 +1,4 @@
-package com.example.finanzas
+package com.example.pokedex
 
 import org.junit.Test
 
