@@ -3,15 +3,15 @@ package com.example.pokedex.Ui.pokeList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.entities.PokeResult
 import com.example.pokedex.databinding.CardPokemonSearchBinding
-import com.example.pokedex.model.api.PokeResult
 
 class PokeListAdapter(val pokemonClick: (Int)-> Unit): RecyclerView.Adapter<PokeListAdapter.SearchViewHolder>() {
 
     var pokemonlist: List<PokeResult> = emptyList<PokeResult>()
     lateinit var binding : CardPokemonSearchBinding
-    fun setData(list: List<PokeResult>){
-        pokemonlist = list
+    fun setData(list: List<PokeResult>?){
+        pokemonlist = list ?: emptyList<PokeResult>()
         notifyDataSetChanged()
     }
 

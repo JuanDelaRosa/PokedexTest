@@ -1,11 +1,13 @@
 package com.example.pokedex.Ui.pokeList
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pokedex.LayoutUtils
+import com.example.pokedex.PokedexApplication
 import com.example.pokedex.Ui.pokeinfo.PokeInfoActivity
 import com.example.pokedex.databinding.PokeListActivityBinding
 
@@ -21,7 +23,9 @@ class PokeListActivity : AppCompatActivity() {
         binding = PokeListActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //inicializa viewModel
-        viewModel = ViewModelProvider(this).get(PokeListViewModel::class.java)
+
+        viewModel = PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication).getPokeListUseCase).create(PokeListViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(PokeListViewModel::class.java)
 
         initUI()
     }
@@ -35,8 +39,23 @@ class PokeListActivity : AppCompatActivity() {
         }
 
         viewModel.getPokemonList()
-        viewModel.pokemonList.observe(this, Observer { list ->
-            (binding.pokelistRecyclerView.adapter as PokeListAdapter).setData(list)
+        viewModel.pokelist.observe(this, Observer { pokelist ->
+            pokelist?.let {
+                (binding.pokelistRecyclerView.adapter as PokeListAdapter).setData(
+                    it.results
+                )
+            }
+        })
+
+        viewModel.dataLoading.observe(this, Observer { loading ->
+            when (loading) {
+                true -> LayoutUtils.crossFade(binding.pbLoading, binding.pokelistRecyclerView)
+                false -> LayoutUtils.crossFade(binding.pokelistRecyclerView, binding.pbLoading)
+            }
+        })
+
+        viewModel.error.observe(this, {
+            Toast.makeText(this, "Ocurrio un error: ${it!!}", Toast.LENGTH_SHORT).show()
         })
     }
 }
