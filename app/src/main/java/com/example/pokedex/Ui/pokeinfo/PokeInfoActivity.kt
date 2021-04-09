@@ -19,7 +19,6 @@ class PokeInfoActivity : AppCompatActivity() {
         binding = PokeinfoActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = PokeInfoViewModel.PokeInfoViewModelFactory((application as PokedexApplication).getPokemonUseCase).create(PokeInfoViewModel::class.java)
-        //viewModel = ViewModelProvider(this).get(PokeInfoViewModel::class.java)
         initUI()
     }
 

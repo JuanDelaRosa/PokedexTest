@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.domain.repositories.IPokemonRepository
 import com.example.domain.usecases.GetPokeListUseCase
 import com.example.domain.usecases.GetPokemonUseCase
-import com.example.pokedex.di.ServiceLocator
 import timber.log.Timber
 
 class PokedexApplication : Application() {

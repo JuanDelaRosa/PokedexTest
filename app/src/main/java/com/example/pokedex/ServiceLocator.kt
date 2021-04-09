@@ -1,4 +1,4 @@
-package com.example.pokedex.di
+package com.example.pokedex
 
 import com.example.data.api.NetworkModule
 import com.example.data.mappers.PokeApiResponseMapper
@@ -14,7 +14,6 @@ object ServiceLocator {
     var pokemonRepository: PokemonRepository? = null
 
     fun provideBooksRepository(): PokemonRepository {
-        // useful because this method can be accessed by multiple threads
         synchronized(this) {
             return pokemonRepository ?: createPokemonRepository()
         }

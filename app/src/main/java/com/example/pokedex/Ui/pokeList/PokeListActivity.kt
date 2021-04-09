@@ -13,20 +13,14 @@ import com.example.pokedex.databinding.PokeListActivityBinding
 
 class PokeListActivity : AppCompatActivity() {
 
-    ///Declaracion del Binding
     private lateinit var binding: PokeListActivityBinding
     private lateinit var  viewModel: PokeListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ///Inicializamos el Binding
         binding = PokeListActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //inicializa viewModel
-
         viewModel = PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication).getPokeListUseCase).create(PokeListViewModel::class.java)
-        //viewModel = ViewModelProvider(this).get(PokeListViewModel::class.java)
-
         initUI()
     }
 
