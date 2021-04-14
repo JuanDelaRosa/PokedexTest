@@ -12,9 +12,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Pokedex">
-        <activity android:name="com.example.pokedex.Ui.pokeinfo.PokeInfoActivity"/>
-        <activity android:name="com.example.pokedex.Ui.pokeList.PokeListActivity">
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.pokedex.ui.pokeinfo.PokeinfoActivity"/>
+        <activity android:name="com.example.pokedex.ui.pokeList.PokeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

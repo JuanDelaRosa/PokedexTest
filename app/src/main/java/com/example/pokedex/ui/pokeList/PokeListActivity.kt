@@ -1,4 +1,4 @@
-package com.example.pokedex.Ui.pokeList
+package com.example.pokedex.ui.pokeList
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,26 +8,24 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.LayoutUtils
 import com.example.pokedex.PokedexApplication
-import com.example.pokedex.Ui.pokeinfo.PokeInfoActivity
 import com.example.pokedex.databinding.PokeListActivityBinding
+import com.example.pokedex.ui.pokeinfo.PokeinfoActivity
 
 class PokeListActivity : AppCompatActivity() {
 
-    private lateinit var binding: PokeListActivityBinding
-    private lateinit var  viewModel: PokeListViewModel
+    private val binding: PokeListActivityBinding by lazy { PokeListActivityBinding.inflate(layoutInflater) }
+    private val viewModel: PokeListViewModel by lazy{ PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication).getPokeListUseCase).create(PokeListViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PokeListActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication).getPokeListUseCase).create(PokeListViewModel::class.java)
         initUI()
     }
 
     private fun initUI() {
         binding.pokelistRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.pokelistRecyclerView.adapter = PokeListAdapter{
-            val intent = Intent(this, PokeInfoActivity::class.java)
+            val intent = Intent(this, PokeinfoActivity::class.java)
             intent.putExtra("id",it)
             startActivity(intent)
         }

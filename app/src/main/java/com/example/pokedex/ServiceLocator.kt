@@ -13,7 +13,7 @@ object ServiceLocator {
     @Volatile
     var pokemonRepository: PokemonRepository? = null
 
-    fun provideBooksRepository(): PokemonRepository {
+    fun providePokeRepository(): PokemonRepository {
         synchronized(this) {
             return pokemonRepository ?: createPokemonRepository()
         }
@@ -23,7 +23,7 @@ object ServiceLocator {
         val newRepo =
             PokemonRepository(
                 PokemonRemoteDataSource(
-                    networkModule.createBooksApi("https://pokeapi.co/api/v2/"),
+                    networkModule.createPokeAPI("https://pokeapi.co/api/v2/"),
                     PokeApiResponseMapper()
                 )
             )

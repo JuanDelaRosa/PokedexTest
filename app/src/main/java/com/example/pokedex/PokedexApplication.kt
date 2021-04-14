@@ -8,7 +8,7 @@ import timber.log.Timber
 
 class PokedexApplication : Application() {
     private val pokemonRepository: IPokemonRepository
-        get() = ServiceLocator.provideBooksRepository()
+        get() = ServiceLocator.providePokeRepository()
 
     val getPokeListUseCase: GetPokeListUseCase
         get() = GetPokeListUseCase(pokemonRepository)

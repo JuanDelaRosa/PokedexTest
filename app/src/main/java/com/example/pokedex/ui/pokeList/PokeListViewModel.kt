@@ -1,10 +1,12 @@
-package com.example.pokedex.Ui.pokeList
+package com.example.pokedex.ui.pokeList
 
 import androidx.lifecycle.*
 import com.example.domain.common.Result
 import com.example.domain.entities.PokeResponse
 import com.example.domain.usecases.GetPokeListUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PokeListViewModel(private val getPokeListUseCase: GetPokeListUseCase) : ViewModel() {
 
@@ -19,6 +21,7 @@ class PokeListViewModel(private val getPokeListUseCase: GetPokeListUseCase) : Vi
 
     fun getPokemonList() {
         viewModelScope.launch {
+            withContext(Dispatchers.IO){ }
             _dataLoading.postValue(true)
             when (val pokeResult = getPokeListUseCase.invoke()){
                 is Result.Success -> {
