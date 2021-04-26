@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.pokedex.ui.pokeinfo.PokeinfoActivity"/>
-        <activity android:name="com.example.pokedex.ui.pokeList.PokeListActivity">
+        <activity android:name=".ui.RxtestActivity"/>
+        <activity android:name=".ui.pokeinfo.PokeinfoActivity" />
+        <activity android:name=".ui.pokeList.PokeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

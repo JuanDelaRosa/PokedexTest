@@ -4,11 +4,12 @@ import androidx.lifecycle.*
 import com.example.domain.common.Result
 import com.example.domain.entities.PokeResponse
 import com.example.domain.usecases.GetPokeListUseCase
+import com.example.pokedex.PokedexApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PokeListViewModel(private val getPokeListUseCase: GetPokeListUseCase) : ViewModel() {
+class PokeListViewModel(private val pokedexapp: PokedexApplication) : ViewModel() {
 
     private val _dataLoading = MutableLiveData(true)
     val dataLoading: LiveData<Boolean> = _dataLoading
@@ -21,9 +22,9 @@ class PokeListViewModel(private val getPokeListUseCase: GetPokeListUseCase) : Vi
 
     fun getPokemonList() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){ }
+           // withContext(Dispatchers.IO){ }
             _dataLoading.postValue(true)
-            when (val pokeResult = getPokeListUseCase.invoke()){
+            when (val pokeResult = pokedexapp.getPokeListUseCase.invoke()){
                 is Result.Success -> {
                     pokelist.value = pokeResult.data
                     _dataLoading.postValue(false)
@@ -45,10 +46,10 @@ class PokeListViewModel(private val getPokeListUseCase: GetPokeListUseCase) : Vi
         }*/
     }
 
-    class PokeListViewModelFactory(private val getPokeListUseCase: GetPokeListUseCase) : ViewModelProvider.NewInstanceFactory() {
+    class PokeListViewModelFactory(private val pokedexapp: PokedexApplication) : ViewModelProvider.NewInstanceFactory() {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return PokeListViewModel(getPokeListUseCase) as T
+            return PokeListViewModel(pokedexapp) as T
         }
     }
 }

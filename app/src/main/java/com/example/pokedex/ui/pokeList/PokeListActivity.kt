@@ -14,7 +14,7 @@ import com.example.pokedex.ui.pokeinfo.PokeinfoActivity
 class PokeListActivity : AppCompatActivity() {
 
     private val binding: PokeListActivityBinding by lazy { PokeListActivityBinding.inflate(layoutInflater) }
-    private val viewModel: PokeListViewModel by lazy{ PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication).getPokeListUseCase).create(PokeListViewModel::class.java) }
+    private val viewModel: PokeListViewModel by lazy{ PokeListViewModel.PokeListViewModelFactory((application as PokedexApplication)).create(PokeListViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class PokeListActivity : AppCompatActivity() {
         }
 
         viewModel.getPokemonList()
-        viewModel.pokelist.observe(this, Observer { pokelist ->
+        viewModel.pokelist.observe(this, { pokelist ->
             pokelist?.let {
                 (binding.pokelistRecyclerView.adapter as PokeListAdapter).setData(
                     it.results
@@ -39,7 +39,7 @@ class PokeListActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.dataLoading.observe(this, Observer { loading ->
+        viewModel.dataLoading.observe(this, { loading ->
             when (loading) {
                 true -> LayoutUtils.crossFade(binding.pbLoading, binding.pokelistRecyclerView)
                 false -> LayoutUtils.crossFade(binding.pokelistRecyclerView, binding.pbLoading)

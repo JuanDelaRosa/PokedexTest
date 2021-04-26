@@ -1,10 +1,12 @@
 package com.example.pokedex.ui.pokeinfo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokedex.PokedexApplication
 import com.example.pokedex.databinding.PokeinfoActivityBinding
+import com.example.pokedex.ui.RxtestActivity
 
 
 class PokeinfoActivity : AppCompatActivity() {
@@ -29,5 +31,9 @@ class PokeinfoActivity : AppCompatActivity() {
         viewModel.error.observe(this, {
             Toast.makeText(this, "Ocurrio un error: ${it!!}", Toast.LENGTH_SHORT).show()
         })
+        binding.image.setOnClickListener {
+            val intent = Intent(this, RxtestActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

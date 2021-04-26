@@ -4,6 +4,7 @@ import com.example.data.api.NetworkModule
 import com.example.data.mappers.PokeApiResponseMapper
 import com.example.data.repositories.PokemonRemoteDataSource
 import com.example.data.repositories.PokemonRepository
+import com.example.domain.repositories.IPokemonRepository
 
 object ServiceLocator {
     private val networkModule by lazy {
@@ -11,15 +12,15 @@ object ServiceLocator {
     }
 
     @Volatile
-    var pokemonRepository: PokemonRepository? = null
+    var pokemonRepository: IPokemonRepository? = null
 
-    fun providePokeRepository(): PokemonRepository {
+    fun providePokeRepository(): IPokemonRepository {
         synchronized(this) {
             return pokemonRepository ?: createPokemonRepository()
         }
     }
 
-    private fun createPokemonRepository(): PokemonRepository {
+    private fun createPokemonRepository(): IPokemonRepository {
         val newRepo =
             PokemonRepository(
                 PokemonRemoteDataSource(
